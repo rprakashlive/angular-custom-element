@@ -9,6 +9,6 @@ export class AppComponent {
   title = 'custom-element-v1';
   
   sayHi(){
-    alert("Hello World!!!");
+    alert("Hello am angular custom element!!!");
   }
 }
