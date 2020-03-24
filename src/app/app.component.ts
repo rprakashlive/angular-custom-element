@@ -33,7 +33,6 @@ export class AppComponent {
   }
 
   openModal(){
-    console.log("dd")
     this.modalRef = this.modalService.open(this.myModal, {
         size: "md",
         modalClass: 'mymodal',
@@ -47,7 +46,8 @@ export class AppComponent {
     })
 }
 submitModalData(data) {
- console.log('data', data);
+  console.log('data', data);
+  this.user = data;
 }
 closeModal(){
     this.modalService.close(this.modalRef);
