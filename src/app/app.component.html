@@ -1,12 +1,14 @@
 <p>
-  Custom Angular Element
+  <!-- Custom Angular Element -->
 </p>
+<div class="col-12">
+<label *ngIf="name">Text you entered : {{ name }}</label>
+</div>
+<p *ngIf="name">{{dataChanged(name)}}</p>
 
-<button (click)="sayHi()">Say Hi!</button>
-
-
+<!-- 
 <div>
-  <button (click)="openModal()">open my modal</button>
+  <button class="btn btn-md" (click)="openModal()">open my modal</button>
   <modal #myModal >
       <modal-header>
           <h1>Modal header</h1>
@@ -42,4 +44,4 @@
           <button  [disabled]="sampleForm.pristine || sampleForm.invalid" class="btn btn-success ml-3" (click)="submitModalData(user)">Submit</button>
       </modal-footer>
   </modal>
-</div>
+</div> -->

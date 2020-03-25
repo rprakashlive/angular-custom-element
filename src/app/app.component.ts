@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import {OnInit, Component, ViewChild, EventEmitter, Input, Output, ElementRef, ViewEncapsulation, SimpleChanges } from '@angular/core';
 import { ModalManager } from 'ngb-modal';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 
@@ -6,22 +6,33 @@ import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class AppComponent {
   title = 'custom-element-v1';
   @ViewChild('myModal', {static: false}) myModal;
+  
+  @Input() name: string;
+  @Input() email;
+  @Output() display = new EventEmitter();
+
   private modalRef;
   sampleForm: FormGroup;
   constructor(private modalService: ModalManager, private fb: FormBuilder){}
   user:any = {};
-  sayHi(){
-    alert("Hello, I am angular custom element !!!");
+  
+  dataChanged(data) {
+    if(data.toLowerCase() === 'hi') {
+      this.display.emit('Hi, Nice to meet you'); 
+    }else if(data.toLowerCase() === 'hello') {
+      this.display.emit('Yes, Please'); 
+    } else {
+      this.display.emit('Sorry, No match found'); 
+    } 
   }
 
   ngOnInit() {
-    console.log("test")
-    this.openModal();
     this.validateForm();
   }
 
@@ -46,11 +57,12 @@ export class AppComponent {
     })
 }
 submitModalData(data) {
-  console.log('data', data);
   this.user = data;
+  this.display.emit(data);
 }
+
 closeModal(){
     this.modalService.close(this.modalRef);
-    //or this.modalRef.close();
 }
+
 }
